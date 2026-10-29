@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Information System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Student Information System</h1>
+
+    <form id="studentForm">
+
+        <h3>Student Details</h3>
+
+        <label>Name:</label>
+        <input type="text" id="name" required>
+        <br><br>
+
+        <label>Age:</label>
+        <input type="number" id="age" required>
+        <br><br>
+
+        <label>CGPA:</label>
+        <input type="number" id="cgpa" step="0.01" min="0" max="4" required>
+        <br><br>
+
+        <label>Student Status:</label>
+
+        <input type="radio" name="status" value="true" checked>
+        Active
+
+        <input type="radio" name="status" value="false">
+        Inactive
+
+        <br><br>
+
+        <label>Marks:</label>
+        <input type="number" id="marks" min="0" max="100" required>
+        <br><br>
+
+        <h3>Enter Three Student Names</h3>
+
+        <label>Student 1:</label>
+        <input type="text" id="student1" required>
+        <br><br>
+
+        <label>Student 2:</label>
+        <input type="text" id="student2" required>
+        <br><br>
+
+        <label>Student 3:</label>
+        <input type="text" id="student3" required>
+        <br><br>
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+    <hr>
+
+    <div id="output"></div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

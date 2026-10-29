@@ -1,79 +1,62 @@
 
-let values = [];
+function showStudent(name, age) {
+    return "<h2>showStudent() Function</h2>" +
+        "Student Name: " + name + "<br>" +
+        "Student Age: " + age + "<br>";
+}
 
-function press(value) {
-    let display = document.getElementById("digit");
 
-    if (display.value === "Error") {
-        display.value = "";
+
+function getGrade(marks) {
+    let grade;
+
+    if (marks >= 80) {
+        grade = "A+";
+    } else if (marks >= 70) {
+        grade = "A";
+    } else if (marks >= 60) {
+        grade = "B";
+    } else {
+        grade = "F";
     }
 
-    display.value += value;
+    return grade;
 }
 
-function clearDisplay() {
-    document.getElementById("digit").value = "";
-}
 
-function deleteLast() {
-    let display = document.getElementById("digit");
-    display.value = display.value.slice(0, -1);
-}
+function showStudentInfo(name, age, cgpa, status, marks, grade, studentNames) {
 
-function calculateExpression(expression) {
-    if (!/^[0-9+\-*/.()\s]+$/.test(expression)) {
-        throw new Error("Invalid expression");
+    
+    let courses = [
+        "Web Technology",
+        "OOP",
+        "Database"
+    ];
+
+    let result = "";
+
+   
+    result += "<h2>Student Information</h2>" +
+        "Name: " + name + " (" + typeof name + ")<br>" +
+        "Age: " + age + " (" + typeof age + ")<br>" +
+        "CGPA: " + cgpa + " (" + typeof cgpa + ")<br>" +
+        "Status: " + (status ? "Active" : "Inactive") + " (" + typeof status + ")<br>" +
+        "Marks: " + marks + " (" + typeof marks + ")<br>" +
+        "Grade: " + grade + " (" + typeof grade + ")<br>";
+
+    
+    result += "<h2>Courses</h2>";
+    for (let i = 0; i < courses.length; i++) {
+        result += (i + 1) + ". " + courses[i] + "<br>";
     }
 
-    let answer = Function(
-        '"use strict"; return (' + expression + ')'
-    )();
+    
+    result += showStudent(name, age);
 
-    if (!Number.isFinite(answer)) {
-        throw new Error("Invalid result");
-    }
-
-    return Number(answer.toFixed(10));
-}
-
-function calculate() {
-    let display = document.getElementById("digit");
-
-    try {
-        if (display.value === "") return;
-
-        let answer = calculateExpression(display.value);
-
-        values.push(answer);
-
-        display.value = answer;
-    } catch {
-        display.value = "Error";
-    }
-}
-
-function percentage() {
-    let display = document.getElementById("digit");
-
-    try {
-        if (display.value === "") return;
-
-        let answer = calculateExpression(display.value);
-        answer = answer / 100;
-
-        values.push(answer);
-
-        display.value = answer;
-    } catch {
-        display.value = "Error";
-    }
-}
-
-function showResults() {
-    let result = "<h3>Calculation History</h3>";
-
-    for (let i = 0; i < values.length; i++) {
-        result += values[i] + "<br>";
+    
+    result += "<h2>All Student Names</h2>";
+    for (let i = 0; i < studentNames.length; i++) {
+        result += (i + 1) + ". " + studentNames[i] + "<br>";
     }
 
     document.getElementById("output").innerHTML = result;
@@ -82,3 +65,43 @@ function showResults() {
 
 
 
+document.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+    
+    let name =
+        document.getElementById("name").value;
+
+    
+    let age =
+        parseInt(document.getElementById("age").value);
+
+    
+    let cgpa =
+        parseFloat(document.getElementById("cgpa").value);
+
+    
+    let status =
+        document.querySelector(
+            'input[name="status"]:checked'
+        ).value === "true";
+
+    
+    let marks =
+        parseInt(document.getElementById("marks").value);
+
+    
+    let grade = getGrade(marks);
+
+    
+    let studentNames = [
+        document.getElementById("student1").value,
+        document.getElementById("student2").value,
+        document.getElementById("student3").value
+    ];
+
+
+    showStudentInfo(name, age, cgpa, status, marks, grade, studentNames);
+
+});
